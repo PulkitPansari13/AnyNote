@@ -1,0 +1,44 @@
+{% extends 'notes_app/base.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {% if not form.instance.pk %}
+        AnyNote|New Note
+    {% else%}
+        AnyNote|Edit Note
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+<div class="card bg-light border-info" style="width: 22rem;">
+    <div class="card-body">
+    <h2 class="card-title">
+    {% if not form.instance.pk %}
+        New Note
+    {% else%}
+        Edit Note
+    {% endif %}
+    </h2>
+
+    <form method="post" >
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+            <div class="form-group has-errors text-danger small">
+                {{error}}
+            </div>
+        {% endfor %}
+
+        {% render_field form.text placeholder='Write your note here...' class='form-control' style="resize:none;" %}
+        <div class="form-group has-errors text-danger small">
+            {{ form.text.errors}}
+        </div>
+
+        <input type="submit" class='btn btn-info' value="Save">
+        <a class='btn btn-secondary' href="{% url 'notes_app:list_note'%}">Cancle</a>
+    </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'notes_app/base.html'%}
+{% load static %}
+
+{% block title %}
+    AnyNote|MyNotes
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" type="text/css" href='{% static "notes_app/stylednote.css" %}'>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="card bg-light border-info mb-3" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+    <div class="card-header"></div>
+        <div class="card-body ">
+            {% filter linebreaksbr|truncatewords:40 %}
+                <p class="card-text">{{ note_details.text|linebreaks }}</p>
+            {% endfilter %}
+<!--            <a href="{{note.id}}/" class="btn btn-primary">Details</a>-->
+            <a class='btn btn-warning' href="{% url 'notes_app:note_update' pk=note_details.pk %}">Edit</a>
+            <a class='btn btn-danger' href="{% url 'notes_app:note_delete' pk=note_details.pk %}">Delete</a>
+        </div>
+</div>
+<p></p>
+
+
+<!--<form method="post">-->
+<!--  -->
+<!--  <input type="submit" class="btn btn-danger" value="Delete">-->
+<!--</form>-->
+<a class='btn btn-primary' href="{% url 'notes_app:list_note'%}">My Notes</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'notes_app/base.html'%}
+{% load static %}
+
+{% block title %}
+    AnyNote|MyNotes
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'notes_app/stylednote.css'%}">
+{% endblock %}
+
+{% block body_block %}
+    <h2>Welcome {{user.username}} !</h2>
+    {% if note_list %}
+        <div class="card-columns">
+
+            {% for note in note_list %}
+
+                    <div class="card bg-light border-info mb-3" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+                        <div class="card-header"></div>
+                            <div class="card-body ">
+                                    {% filter linebreaksbr|truncatewords:40 %}
+                                        <p class="card-text">{{ note.text }}</p>
+                                    {% endfilter %}
+                                <a href="{{note.id}}/" class="btn btn-primary">Details</a>
+                            </div>
+                    </div>
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <p><h2>No saved notes</h2></p>
+        <p><h2>Start by adding one.</h2></p>
+    {% endif %}
+<!--        </div>-->
+
+    <p></p>
+    <p><a class="btn btn-success" href="{% url 'notes_app:create_note'%}">+ New Note</a></p>
+{% endblock %}

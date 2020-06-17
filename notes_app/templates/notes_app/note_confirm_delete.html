@@ -1,0 +1,15 @@
+{% extends 'notes_app/base.html'%}
+{% load static %}
+
+{% block title %}
+    AnyNote|Delete
+{% endblock %}
+
+{% block body_block %}
+
+    <form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ note.text|truncatewords:3 }}"?</p>
+    <input class='btn btn-danger' type="submit" value="Confirm" />
+  </form>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'notes_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    <h1>The Simplest way <br>to keep notes</h1>
+    <p>Light, clean and free.</p>
+    <p><a class="btn btn-success" href="{% url 'notes_app:create_note'%}">+ New Note</a></p>
+</div>
+{% endblock %}

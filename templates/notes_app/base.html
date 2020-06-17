@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}
+            AnyNote
+      {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% block link %}
+
+    {% endblock %}
+
+</head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+      <div class="container">
+        <ul class="navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'index' %}">AnyNote</a></li>
+<!--          <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>-->
+          {% if not user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">SignUp</a></li>
+            <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          {% else %}
+            <li><a class="nav-link" href="{% url 'notes_app:list_note' %}">My Notes</a></li>
+            <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+      <p></p>
+    <div class="container">
+      {% block body_block %}
+
+      {% endblock %}
+    </div>
+
+  </body>
+
+ <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</html>
